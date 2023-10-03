@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OCR 3D App</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- Logo Container -->
+    <div class="logo-container">
+        <a href="https://github.com/himanshunanda22" target="_blank">
+            <img src="{{ url_for('static', filename='images/gitlogo.svg') }}" alt="GitHub Logo" class="logo">
+        </a>
+        <a href="https://leetcode.com/hNanda22/" target="_blank">
+            <img src="{{ url_for('static', filename='images/leetlogo.ico') }}" alt="LeetCode Logo" class="logo">
+        </a>
+    </div>
+    <div class="container mt-4">
+        <h1 class = custom>OCR Image Upload</h1>
+        <!-- Add a class to the form container -->
+        <div class="upload-form-container">
+            <form method="POST" enctype="multipart/form-data">
+                <!-- Apply styles to the input to match the button -->
+                <input type="file" name="file" id="file" accept=".jpg, .png, .jpeg" style="display: none;">
+                <label for="file" class="upload-button" style="cursor: pointer;">Upload Image</label>
+                <input type="submit" value="Upload and OCR" class="upload-button">
+                <!-- Style the Refresh button similar to other buttons -->
+                <button class="upload-button refresh-button" onclick="clearResults()">Refresh</button>
+            </form>
+        </div>
+
+        <!-- Right Container for Images and Texts with Scrollable Container -->
+        <div class="right-container">
+            {% if image_path %}
+            <h2>OCR Results:</h2>
+            <!-- Modify the img tag to add an ID for easy removal -->
+            <img src="{{ image_path }}" alt="Uploaded Image" id="uploaded-image">
+            <!-- Wrap the text and image in a scrollable container div -->
+            <div class="scrollable-container">
+                <ul class="results">
+                    {% for result in results %}
+                    <li>{{ result }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Include Bootstrap JS (you may need to download it and place it in your "static" folder) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <!-- JavaScript for Theme Switching and Refreshing -->
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const lightLogo = document.getElementById('light-logo');
+        const darkLogo = document.getElementById('dark-logo');
+        const body = document.body;
+
+        themeToggle.addEventListener('change', function() {
+            if (this.checked) {
+                body.classList.add('dark-theme');
+                lightLogo.style.display = 'none';
+                darkLogo.style.display = 'block';
+                document.querySelector('.theme-label').textContent = 'Light Mode';
+            } else {
+                body.classList.remove('dark-theme');
+                lightLogo.style.display = 'block';
+                darkLogo.style.display = 'none';
+                document.querySelector('.theme-label').textContent = 'Dark Mode';
+            }
+        });
+
+        function clearResults() {
+            // Add code to clear the OCR results here
+            // For example, you can clear the ul element that displays results.
+            const resultsList = document.querySelector('.results');
+            resultsList.innerHTML = '';
+
+            // Remove the displayed image
+            const uploadedImage = document.getElementById('uploaded-image');
+            uploadedImage.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
