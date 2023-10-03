@@ -28,7 +28,7 @@ Copy code
 python -m venv venv
 Activate the virtual environment:
 
-On Windows:
+**On Windows:**
 
 bash
 Copy code
@@ -50,7 +50,7 @@ Copy code
 python app.py
 The application will be accessible at http://localhost:5000 in your web browser.
 
-Usage
+**Usage**
 Access the application in your web browser.
 
 Click on the "Choose File" button to upload an image (supported formats: .jpg, .png, .jpeg).
@@ -61,8 +61,29 @@ The OCR results, including recognized text and annotated image, will be displaye
 
 You can switch between light and dark themes using the theme toggle.
 
-File Structure
-app.py: The main Flask application.
-static/: Contains static files (CSS, images).
-templates/: Contains HTML templates.
-uploads/: Automatically created folder to store uploaded images.
+**File Structure**
+flask-ocr-app/                 # Root directory
+│
+├── app.py                     # Main Flask application
+│
+├── static/                    # Static files (CSS, images)
+│   ├── css/
+│   │   └── style.css          # CSS styles for the web app
+│   ├── images/
+│   │   ├── gitlogo.svg        # GitHub logo image
+│   │   ├── leetlogo.ico       # LeetCode logo image
+│   │   └── uploads/           # Uploaded images (auto-generated)
+│   └── ...                    # Other static files
+│
+├── templates/                 # HTML templates
+│   ├── index.html             # Main HTML template for the web app
+│   └── ...                    # Other HTML templates (if any)
+│
+├── uploads/                   # Uploaded images (auto-generated)
+│
+├── README.md                  # Readme file with project documentation
+│
+├── requirements.txt           # List of Python dependencies
+│
+└── venv/                      # Virtual environment (created when using venv)
+
